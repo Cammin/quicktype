@@ -79,9 +79,9 @@ export {
     CSharpTargetLanguage,
     cSharpOptions,
     CSharpRenderer,
-    NewtonsoftCSharpTargetLanguage,
-    newtonsoftCSharpOptions,
-    NewtonsoftCSharpRenderer
+    // NewtonsoftCSharpTargetLanguage,
+    // newtonsoftCSharpOptions,
+    // NewtonsoftCSharpRenderer
 } from "./language/CSharp";
 export { GoTargetLanguage, GoRenderer, goOptions } from "./language/Golang";
 export { ObjectiveCTargetLanguage, ObjectiveCRenderer, objcOptions } from "./language/Objective-C";
