@@ -3,7 +3,8 @@ import { iterableFind } from "collection-utils";
 import { TargetLanguage } from "../TargetLanguage";
 
 // import { NewtonsoftCSharpTargetLanguage } from "./CSharp";
-import { SystemTextJsonCSharpTargetLanguage } from "./CSharpSystemTextJson";
+// import { SystemTextJsonCSharpTargetLanguage } from "./CSharpSystemTextJson";
+import { Utf8JsonCSharpTargetLanguage } from "./CSharpUtf8Json";
 import { GoTargetLanguage } from "./Golang";
 import { CPlusPlusTargetLanguage } from "./CPlusPlus";
 import { ObjectiveCTargetLanguage } from "./Objective-C";
@@ -25,7 +26,8 @@ import { HaskellTargetLanguage } from "./Haskell";
 
 export const all: TargetLanguage[] = [
     // new NewtonsoftCSharpTargetLanguage(),
-    new SystemTextJsonCSharpTargetLanguage(),
+    // new SystemTextJsonCSharpTargetLanguage(),
+    new Utf8JsonCSharpTargetLanguage(),
     new GoTargetLanguage(),
     new RustTargetLanguage(),
     new CrystalTargetLanguage(),
