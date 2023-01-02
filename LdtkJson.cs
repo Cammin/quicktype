@@ -2032,8 +2032,8 @@ namespace LDtkUnity
         public static LdtkJson FromJson(string json) => JsonSerializer.Deserialize<LdtkJson>(json);
     }
 
-    public static class LdtkJson
+    public static class Serialize
     {
-        public static byte[] ToJson(this LdtkJson self) => JsonSerializer.Serialize(self, LDtkUnity.Converter.Settings);
+        public static byte[] ToJson(this LdtkJson self) => JsonSerializer.Serialize(self);
     }
 }
