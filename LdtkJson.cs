@@ -61,6 +61,12 @@ namespace LDtkUnity
         public string BgColor { get; set; }
 
         /// <summary>
+        /// An array of command lines that can be ran manually by the user
+        /// </summary>
+        [DataMember(Name = "customCommands")]
+        public LdtkCustomCommand[] CustomCommands { get; set; }
+
+        /// <summary>
         /// Default grid size for new layers
         /// </summary>
         [DataMember(Name = "defaultGridSize")]
@@ -107,6 +113,12 @@ namespace LDtkUnity
         public Definitions Defs { get; set; }
 
         /// <summary>
+        /// If TRUE, the exported PNGs will include the level background (color or image).
+        /// </summary>
+        [DataMember(Name = "exportLevelBg")]
+        public bool ExportLevelBg { get; set; }
+
+        /// <summary>
         /// **WARNING**: this deprecated value is no longer exported since version 0.9.3  Replaced
         /// by: `imageExportMode`
         /// </summary>
@@ -141,6 +153,12 @@ namespace LDtkUnity
         /// </summary>
         [DataMember(Name = "identifierStyle")]
         public IdentifierStyle IdentifierStyle { get; set; }
+
+        /// <summary>
+        /// Unique project identifier
+        /// </summary>
+        [DataMember(Name = "iid")]
+        public string Iid { get; set; }
 
         /// <summary>
         /// "Image export" option when saving project. Possible values: `None`, `OneImagePerLayer`,
@@ -243,6 +261,18 @@ namespace LDtkUnity
         /// </summary>
         [DataMember(Name = "worlds")]
         public World[] Worlds { get; set; }
+    }
+
+    public partial class LdtkCustomCommand
+    {
+        [DataMember(Name = "command")]
+        public string Command { get; set; }
+
+        /// <summary>
+        /// Possible values: `Manual`, `AfterLoad`, `BeforeSave`, `AfterSave`
+        /// </summary>
+        [DataMember(Name = "when")]
+        public When When { get; set; }
     }
 
     /// <summary>
@@ -407,8 +437,8 @@ namespace LDtkUnity
         public string[] Tags { get; set; }
 
         /// <summary>
-        /// **WARNING**: this deprecated value will be *removed* completely on version 1.2.0+
-        /// Replaced by: `tileRect`
+        /// **WARNING**: this deprecated value is no longer exported since version 1.2.0  Replaced
+        /// by: `tileRect`
         /// </summary>
         [DataMember(Name = "tileId")]
         public long? TileId { get; set; }
@@ -512,6 +542,13 @@ namespace LDtkUnity
         [DataMember(Name = "defaultOverride")]
         public object DefaultOverride { get; set; }
 
+        /// <summary>
+        /// User defined documentation for this field to provide help/tips to level designers about
+        /// accepted values.
+        /// </summary>
+        [DataMember(Name = "doc")]
+        public string Doc { get; set; }
+
         [DataMember(Name = "editorAlwaysShow")]
         public bool EditorAlwaysShow { get; set; }
 
@@ -532,6 +569,15 @@ namespace LDtkUnity
         /// </summary>
         [DataMember(Name = "editorDisplayPos")]
         public EditorDisplayPos EditorDisplayPos { get; set; }
+
+        /// <summary>
+        /// Possible values: `ZigZag`, `StraightArrow`, `CurvedArrow`, `ArrowsLine`, `DashedLine`
+        /// </summary>
+        [DataMember(Name = "editorLinkStyle")]
+        public EditorLinkStyle EditorLinkStyle { get; set; }
+
+        [DataMember(Name = "editorShowInWorld")]
+        public bool EditorShowInWorld { get; set; }
 
         [DataMember(Name = "editorTextPrefix")]
         public string EditorTextPrefix { get; set; }
@@ -732,11 +778,17 @@ namespace LDtkUnity
         public long? AutoSourceLayerDefUid { get; set; }
 
         /// <summary>
-        /// **WARNING**: this deprecated value will be *removed* completely on version 1.2.0+
-        /// Replaced by: `tilesetDefUid`
+        /// **WARNING**: this deprecated value is no longer exported since version 1.2.0  Replaced
+        /// by: `tilesetDefUid`
         /// </summary>
         [DataMember(Name = "autoTilesetDefUid")]
         public long? AutoTilesetDefUid { get; set; }
+
+        /// <summary>
+        /// Allow editor selections when the layer is not currently active.
+        /// </summary>
+        [DataMember(Name = "canSelectWhenInactive")]
+        public bool CanSelectWhenInactive { get; set; }
 
         /// <summary>
         /// Opacity of the layer (0 to 1.0)
@@ -896,6 +948,9 @@ namespace LDtkUnity
 
         [DataMember(Name = "uid")]
         public long Uid { get; set; }
+
+        [DataMember(Name = "usesWizard")]
+        public bool UsesWizard { get; set; }
     }
 
     /// <summary>
@@ -1200,6 +1255,10 @@ namespace LDtkUnity
         [IgnoreDataMember]
         [DataMember(Name = "AutoRuleDef")]
         public AutoLayerRuleDefinition AutoRuleDef { get; set; }
+
+        [IgnoreDataMember]
+        [DataMember(Name = "CustomCommand")]
+        public LdtkCustomCommand CustomCommand { get; set; }
 
         [IgnoreDataMember]
         [DataMember(Name = "Definitions")]
@@ -1881,10 +1940,9 @@ namespace LDtkUnity
         public string LevelIid { get; set; }
 
         /// <summary>
-        /// **WARNING**: this deprecated value will be *removed* completely on version 1.2.0+
-        /// Replaced by: `levelIid`
+        /// **WARNING**: this deprecated value is no longer exported since version 1.2.0  Replaced
+        /// by: `levelIid`
         /// </summary>
-        [IgnoreDataMember]
         [DataMember(Name = "levelUid")]
         public long? LevelUid { get; set; }
     }
@@ -1949,6 +2007,11 @@ namespace LDtkUnity
     }
 
     /// <summary>
+    /// Possible values: `Manual`, `AfterLoad`, `BeforeSave`, `AfterSave`
+    /// </summary>
+    public enum When { AfterLoad, AfterSave, BeforeSave, Manual };
+
+    /// <summary>
     /// Possible values: `Any`, `OnlySame`, `OnlyTags`
     /// </summary>
     public enum AllowedRefs { Any, OnlySame, OnlyTags };
@@ -1965,6 +2028,11 @@ namespace LDtkUnity
     /// Possible values: `Above`, `Center`, `Beneath`
     /// </summary>
     public enum EditorDisplayPos { Above, Beneath, Center };
+
+    /// <summary>
+    /// Possible values: `ZigZag`, `StraightArrow`, `CurvedArrow`, `ArrowsLine`, `DashedLine`
+    /// </summary>
+    public enum EditorLinkStyle { ArrowsLine, CurvedArrow, DashedLine, StraightArrow, ZigZag };
 
     public enum TextLanguageMode { LangC, LangHaxe, LangJs, LangJson, LangLog, LangLua, LangMarkdown, LangPython, LangRuby, LangXml };
 
