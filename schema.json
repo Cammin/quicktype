@@ -1,15 +1,14 @@
 {
   "description": "This file is a JSON schema of files created by LDtk level editor (https://ldtk.io).",
-  "title": "LDtk 1.2.1 JSON schema",
+  "title": "LDtk 1.2.2 JSON schema",
   "$schema": "https://json-schema.org/draft-07/schema#",
   "$ref": "#/LdtkJsonRoot",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "LdtkJsonRoot": {
     "description": "This is the root of any Project JSON file. It contains:  - the project settings, - an array of levels, - a group of definitions (that can probably be safely ignored for most users).",
     "title": "LDtk Json root",
     "required": [
       "bgColor",
-      "customCommands",
       "defs",
       "externalLevels",
       "iid",
@@ -19,6 +18,7 @@
       "appBuildId",
       "backupLimit",
       "backupOnSave",
+      "customCommands",
       "defaultGridSize",
       "defaultLevelBgColor",
       "defaultPivotX",
@@ -1525,7 +1525,7 @@
           ]
         },
         "pxOffsetX": {
-          "description": "X offset in pixels to render this layer, usually 0 (IMPORTANT: this should be added to the `LayerDef` optional offset, see `__pxTotalOffsetX`)",
+          "description": "X offset in pixels to render this layer, usually 0 (IMPORTANT: this should be added to the `LayerDef` optional offset, so you should probably prefer using `__pxTotalOffsetX` which contains the total offset value)",
           "type": [
             "integer"
           ]
@@ -1657,7 +1657,7 @@
           ]
         },
         "pxOffsetY": {
-          "description": "Y offset in pixels to render this layer, usually 0 (IMPORTANT: this should be added to the `LayerDef` optional offset, see `__pxTotalOffsetY`)",
+          "description": "Y offset in pixels to render this layer, usually 0 (IMPORTANT: this should be added to the `LayerDef` optional offset, so you should probably prefer using `__pxTotalOffsetX` which contains the total offset value)",
           "type": [
             "integer"
           ]
