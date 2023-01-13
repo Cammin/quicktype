@@ -214,6 +214,13 @@ namespace LDtkUnity
         public bool SimplifiedExport { get; set; }
 
         /// <summary>
+        /// All instances of entities that have their `exportToToc` flag enabled are listed in this
+        /// array.
+        /// </summary>
+        [DataMember(Name = "toc")]
+        public LdtkTableOfContentEntry[] Toc { get; set; }
+
+        /// <summary>
         /// This optional description is used by LDtk Samples to show up some informations and
         /// instructions.
         /// </summary>
@@ -332,6 +339,19 @@ namespace LDtkUnity
         /// </summary>
         [DataMember(Name = "color")]
         public string Color { get; set; }
+
+        /// <summary>
+        /// User defined documentation for this element to provide help/tips to level designers.
+        /// </summary>
+        [DataMember(Name = "doc")]
+        public string Doc { get; set; }
+
+        /// <summary>
+        /// If enabled, all instances of this entity will be listed in the project "Table of content"
+        /// object.
+        /// </summary>
+        [DataMember(Name = "exportToToc")]
+        public bool ExportToToc { get; set; }
 
         /// <summary>
         /// Array of field definitions
@@ -795,6 +815,12 @@ namespace LDtkUnity
         /// </summary>
         [DataMember(Name = "displayOpacity")]
         public double DisplayOpacity { get; set; }
+
+        /// <summary>
+        /// User defined documentation for this element to provide help/tips to level designers.
+        /// </summary>
+        [DataMember(Name = "doc")]
+        public string Doc { get; set; }
 
         /// <summary>
         /// An array of tags to forbid some Entities in this layer
@@ -1274,7 +1300,7 @@ namespace LDtkUnity
 
         [IgnoreDataMember]
         [DataMember(Name = "EntityReferenceInfos")]
-        public FieldInstanceEntityReference EntityReferenceInfos { get; set; }
+        public ReferenceToAnEntityInstance EntityReferenceInfos { get; set; }
 
         [IgnoreDataMember]
         [DataMember(Name = "EnumDef")]
@@ -1298,7 +1324,7 @@ namespace LDtkUnity
 
         [IgnoreDataMember]
         [DataMember(Name = "GridPoint")]
-        public FieldInstanceGridPoint GridPoint { get; set; }
+        public GridPoint GridPoint { get; set; }
 
         [IgnoreDataMember]
         [DataMember(Name = "IntGridValueDef")]
@@ -1327,6 +1353,10 @@ namespace LDtkUnity
         [IgnoreDataMember]
         [DataMember(Name = "NeighbourLevel")]
         public NeighbourLevel NeighbourLevel { get; set; }
+
+        [IgnoreDataMember]
+        [DataMember(Name = "TableOfContentEntry")]
+        public LdtkTableOfContentEntry TableOfContentEntry { get; set; }
 
         [IgnoreDataMember]
         [DataMember(Name = "Tile")]
@@ -1480,9 +1510,9 @@ namespace LDtkUnity
     }
 
     /// <summary>
-    /// This object is used in Field Instances to describe an EntityRef value.
+    /// This object describes the "location" of an Entity instance in the project worlds.
     /// </summary>
-    public partial class FieldInstanceEntityReference
+    public partial class ReferenceToAnEntityInstance
     {
         /// <summary>
         /// IID of the refered EntityInstance
@@ -1512,7 +1542,7 @@ namespace LDtkUnity
     /// <summary>
     /// This object is just a grid-based coordinate used in Field values.
     /// </summary>
-    public partial class FieldInstanceGridPoint
+    public partial class GridPoint
     {
         /// <summary>
         /// X grid-based coordinate
@@ -1947,6 +1977,15 @@ namespace LDtkUnity
         /// </summary>
         [DataMember(Name = "levelUid")]
         public long? LevelUid { get; set; }
+    }
+
+    public partial class LdtkTableOfContentEntry
+    {
+        [DataMember(Name = "identifier")]
+        public string Identifier { get; set; }
+
+        [DataMember(Name = "instances")]
+        public ReferenceToAnEntityInstance[] Instances { get; set; }
     }
 
     /// <summary>
