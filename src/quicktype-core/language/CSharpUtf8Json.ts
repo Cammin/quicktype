@@ -331,8 +331,8 @@ export class CSharpRenderer extends ConvenienceRenderer {
             _anyType => maybeAnnotated(withIssues, anyTypeIssueAnnotation, this._csOptions.typeForAny),
             _nullType => maybeAnnotated(withIssues, nullTypeIssueAnnotation, this._csOptions.typeForAny),
             _boolType => "bool",
-            _integerType => "long",
-            _doubleType => this.doubleType,
+            _integerType => "int",
+            _doubleType => "float",
             _stringType => "string",
             arrayType => {
                 const itemsType = this.csType(arrayType.items, follow, withIssues);

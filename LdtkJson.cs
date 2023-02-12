@@ -40,13 +40,13 @@ namespace LDtkUnity
         /// anonymous.
         /// </summary>
         [DataMember(Name = "appBuildId")]
-        public double AppBuildId { get; set; }
+        public float AppBuildId { get; set; }
 
         /// <summary>
         /// Number of backup files to keep, if the `backupOnSave` is TRUE
         /// </summary>
         [DataMember(Name = "backupLimit")]
-        public long BackupLimit { get; set; }
+        public int BackupLimit { get; set; }
 
         /// <summary>
         /// If TRUE, an extra copy of the project will be created in a sub folder, when saving.
@@ -70,7 +70,7 @@ namespace LDtkUnity
         /// Default grid size for new layers
         /// </summary>
         [DataMember(Name = "defaultGridSize")]
-        public long DefaultGridSize { get; set; }
+        public int DefaultGridSize { get; set; }
 
         /// <summary>
         /// Default background color of levels
@@ -84,7 +84,7 @@ namespace LDtkUnity
         /// the change immediately.<br/><br/>  Default new level height
         /// </summary>
         [DataMember(Name = "defaultLevelHeight")]
-        public long? DefaultLevelHeight { get; set; }
+        public int? DefaultLevelHeight { get; set; }
 
         /// <summary>
         /// **WARNING**: this field will move to the `worlds` array after the "multi-worlds" update.
@@ -92,19 +92,19 @@ namespace LDtkUnity
         /// the change immediately.<br/><br/>  Default new level width
         /// </summary>
         [DataMember(Name = "defaultLevelWidth")]
-        public long? DefaultLevelWidth { get; set; }
+        public int? DefaultLevelWidth { get; set; }
 
         /// <summary>
         /// Default X pivot (0 to 1) for new entities
         /// </summary>
         [DataMember(Name = "defaultPivotX")]
-        public double DefaultPivotX { get; set; }
+        public float DefaultPivotX { get; set; }
 
         /// <summary>
         /// Default Y pivot (0 to 1) for new entities
         /// </summary>
         [DataMember(Name = "defaultPivotY")]
-        public double DefaultPivotY { get; set; }
+        public float DefaultPivotY { get; set; }
 
         /// <summary>
         /// A structure containing all the definitions of this project
@@ -198,7 +198,7 @@ namespace LDtkUnity
         /// Next Unique integer ID available
         /// </summary>
         [DataMember(Name = "nextUid")]
-        public long NextUid { get; set; }
+        public int NextUid { get; set; }
 
         /// <summary>
         /// File naming pattern for exported PNGs
@@ -233,7 +233,7 @@ namespace LDtkUnity
         /// the change immediately.<br/><br/>  Height of the world grid in pixels.
         /// </summary>
         [DataMember(Name = "worldGridHeight")]
-        public long? WorldGridHeight { get; set; }
+        public int? WorldGridHeight { get; set; }
 
         /// <summary>
         /// **WARNING**: this field will move to the `worlds` array after the "multi-worlds" update.
@@ -241,7 +241,7 @@ namespace LDtkUnity
         /// the change immediately.<br/><br/>  Width of the world grid in pixels.
         /// </summary>
         [DataMember(Name = "worldGridWidth")]
-        public long? WorldGridWidth { get; set; }
+        public int? WorldGridWidth { get; set; }
 
         /// <summary>
         /// **WARNING**: this field will move to the `worlds` array after the "multi-worlds" update.
@@ -360,13 +360,13 @@ namespace LDtkUnity
         public FieldDefinition[] FieldDefs { get; set; }
 
         [DataMember(Name = "fillOpacity")]
-        public double FillOpacity { get; set; }
+        public float FillOpacity { get; set; }
 
         /// <summary>
         /// Pixel height
         /// </summary>
         [DataMember(Name = "height")]
-        public long Height { get; set; }
+        public int Height { get; set; }
 
         [DataMember(Name = "hollow")]
         public bool Hollow { get; set; }
@@ -398,13 +398,13 @@ namespace LDtkUnity
         public LimitScope LimitScope { get; set; }
 
         [DataMember(Name = "lineOpacity")]
-        public double LineOpacity { get; set; }
+        public float LineOpacity { get; set; }
 
         /// <summary>
         /// Max instances count
         /// </summary>
         [DataMember(Name = "maxCount")]
-        public long MaxCount { get; set; }
+        public int MaxCount { get; set; }
 
         /// <summary>
         /// An array of 4 dimensions for the up/right/down/left borders (in this order) when using
@@ -412,19 +412,19 @@ namespace LDtkUnity
         /// this array is empty.<br/>  See: https://en.wikipedia.org/wiki/9-slice_scaling
         /// </summary>
         [DataMember(Name = "nineSliceBorders")]
-        public long[] NineSliceBorders { get; set; }
+        public int[] NineSliceBorders { get; set; }
 
         /// <summary>
         /// Pivot X coordinate (from 0 to 1.0)
         /// </summary>
         [DataMember(Name = "pivotX")]
-        public double PivotX { get; set; }
+        public float PivotX { get; set; }
 
         /// <summary>
         /// Pivot Y coordinate (from 0 to 1.0)
         /// </summary>
         [DataMember(Name = "pivotY")]
-        public double PivotY { get; set; }
+        public float PivotY { get; set; }
 
         /// <summary>
         /// Possible values: `Rectangle`, `Ellipse`, `Tile`, `Cross`
@@ -461,10 +461,10 @@ namespace LDtkUnity
         /// by: `tileRect`
         /// </summary>
         [DataMember(Name = "tileId")]
-        public long? TileId { get; set; }
+        public int? TileId { get; set; }
 
         [DataMember(Name = "tileOpacity")]
-        public double TileOpacity { get; set; }
+        public float TileOpacity { get; set; }
 
         /// <summary>
         /// An object representing a rectangle from an existing Tileset
@@ -484,19 +484,19 @@ namespace LDtkUnity
         /// Tileset ID used for optional tile display
         /// </summary>
         [DataMember(Name = "tilesetId")]
-        public long? TilesetId { get; set; }
+        public int? TilesetId { get; set; }
 
         /// <summary>
         /// Unique Int identifier
         /// </summary>
         [DataMember(Name = "uid")]
-        public long Uid { get; set; }
+        public int Uid { get; set; }
 
         /// <summary>
         /// Pixel width
         /// </summary>
         [DataMember(Name = "width")]
-        public long Width { get; set; }
+        public int Width { get; set; }
     }
 
     /// <summary>
@@ -538,13 +538,13 @@ namespace LDtkUnity
         /// Array max length
         /// </summary>
         [DataMember(Name = "arrayMaxLength")]
-        public long? ArrayMaxLength { get; set; }
+        public int? ArrayMaxLength { get; set; }
 
         /// <summary>
         /// Array min length
         /// </summary>
         [DataMember(Name = "arrayMinLength")]
-        public long? ArrayMinLength { get; set; }
+        public int? ArrayMinLength { get; set; }
 
         [DataMember(Name = "autoChainRef")]
         public bool AutoChainRef { get; set; }
@@ -621,13 +621,13 @@ namespace LDtkUnity
         /// Max limit for value, if applicable
         /// </summary>
         [DataMember(Name = "max")]
-        public double? Max { get; set; }
+        public float? Max { get; set; }
 
         /// <summary>
         /// Min limit for value, if applicable
         /// </summary>
         [DataMember(Name = "min")]
-        public double? Min { get; set; }
+        public float? Min { get; set; }
 
         /// <summary>
         /// Optional regular expression that needs to be matched to accept values. Expected format:
@@ -650,7 +650,7 @@ namespace LDtkUnity
         /// UID of the tileset used for a Tile
         /// </summary>
         [DataMember(Name = "tilesetUid")]
-        public long? TilesetUid { get; set; }
+        public int? TilesetUid { get; set; }
 
         /// <summary>
         /// Internal enum representing the possible field types. Possible values: F_Int, F_Float,
@@ -663,7 +663,7 @@ namespace LDtkUnity
         /// Unique Int identifier
         /// </summary>
         [DataMember(Name = "uid")]
-        public long Uid { get; set; }
+        public int Uid { get; set; }
 
         /// <summary>
         /// If TRUE, the color associated with this field will override the Entity or Level default
@@ -683,31 +683,31 @@ namespace LDtkUnity
         /// Height in pixels
         /// </summary>
         [DataMember(Name = "h")]
-        public long H { get; set; }
+        public int H { get; set; }
 
         /// <summary>
         /// UID of the tileset
         /// </summary>
         [DataMember(Name = "tilesetUid")]
-        public long TilesetUid { get; set; }
+        public int TilesetUid { get; set; }
 
         /// <summary>
         /// Width in pixels
         /// </summary>
         [DataMember(Name = "w")]
-        public long W { get; set; }
+        public int W { get; set; }
 
         /// <summary>
         /// X pixels coordinate of the top-left corner in the Tileset image
         /// </summary>
         [DataMember(Name = "x")]
-        public long X { get; set; }
+        public int X { get; set; }
 
         /// <summary>
         /// Y pixels coordinate of the top-left corner in the Tileset image
         /// </summary>
         [DataMember(Name = "y")]
-        public long Y { get; set; }
+        public int Y { get; set; }
     }
 
     public partial class EnumDefinition
@@ -725,7 +725,7 @@ namespace LDtkUnity
         /// Tileset UID if provided
         /// </summary>
         [DataMember(Name = "iconTilesetUid")]
-        public long? IconTilesetUid { get; set; }
+        public int? IconTilesetUid { get; set; }
 
         /// <summary>
         /// User defined unique identifier
@@ -743,7 +743,7 @@ namespace LDtkUnity
         /// Unique Int identifier
         /// </summary>
         [DataMember(Name = "uid")]
-        public long Uid { get; set; }
+        public int Uid { get; set; }
 
         /// <summary>
         /// All possible enum values, with their optional Tile infos.
@@ -759,13 +759,13 @@ namespace LDtkUnity
         /// height ]`
         /// </summary>
         [DataMember(Name = "__tileSrcRect")]
-        public long[] TileSrcRect { get; set; }
+        public int[] TileSrcRect { get; set; }
 
         /// <summary>
         /// Optional color
         /// </summary>
         [DataMember(Name = "color")]
-        public long Color { get; set; }
+        public int Color { get; set; }
 
         /// <summary>
         /// Enum value
@@ -777,7 +777,7 @@ namespace LDtkUnity
         /// The optional ID of the tile
         /// </summary>
         [DataMember(Name = "tileId")]
-        public long? TileId { get; set; }
+        public int? TileId { get; set; }
     }
 
     public partial class LayerDefinition
@@ -795,14 +795,14 @@ namespace LDtkUnity
         public AutoLayerRuleGroup[] AutoRuleGroups { get; set; }
 
         [DataMember(Name = "autoSourceLayerDefUid")]
-        public long? AutoSourceLayerDefUid { get; set; }
+        public int? AutoSourceLayerDefUid { get; set; }
 
         /// <summary>
         /// **WARNING**: this deprecated value is no longer exported since version 1.2.0  Replaced
         /// by: `tilesetDefUid`
         /// </summary>
         [DataMember(Name = "autoTilesetDefUid")]
-        public long? AutoTilesetDefUid { get; set; }
+        public int? AutoTilesetDefUid { get; set; }
 
         /// <summary>
         /// Allow editor selections when the layer is not currently active.
@@ -814,7 +814,7 @@ namespace LDtkUnity
         /// Opacity of the layer (0 to 1.0)
         /// </summary>
         [DataMember(Name = "displayOpacity")]
-        public double DisplayOpacity { get; set; }
+        public float DisplayOpacity { get; set; }
 
         /// <summary>
         /// User defined documentation for this element to provide help/tips to level designers.
@@ -832,19 +832,19 @@ namespace LDtkUnity
         /// Width and height of the grid in pixels
         /// </summary>
         [DataMember(Name = "gridSize")]
-        public long GridSize { get; set; }
+        public int GridSize { get; set; }
 
         /// <summary>
         /// Height of the optional "guide" grid in pixels
         /// </summary>
         [DataMember(Name = "guideGridHei")]
-        public long GuideGridHei { get; set; }
+        public int GuideGridHei { get; set; }
 
         /// <summary>
         /// Width of the optional "guide" grid in pixels
         /// </summary>
         [DataMember(Name = "guideGridWid")]
-        public long GuideGridWid { get; set; }
+        public int GuideGridWid { get; set; }
 
         [DataMember(Name = "hideFieldsWhenInactive")]
         public bool HideFieldsWhenInactive { get; set; }
@@ -865,7 +865,7 @@ namespace LDtkUnity
         /// Alpha of this layer when it is not the active one.
         /// </summary>
         [DataMember(Name = "inactiveOpacity")]
-        public double InactiveOpacity { get; set; }
+        public float InactiveOpacity { get; set; }
 
         /// <summary>
         /// An array that defines extra optional info for each IntGrid value.<br/>  WARNING: the
@@ -880,14 +880,14 @@ namespace LDtkUnity
         /// speed of this layer, creating a fake 3D (parallax) effect.
         /// </summary>
         [DataMember(Name = "parallaxFactorX")]
-        public double ParallaxFactorX { get; set; }
+        public float ParallaxFactorX { get; set; }
 
         /// <summary>
         /// Parallax vertical factor (from -1 to 1, defaults to 0) which affects the scrolling speed
         /// of this layer, creating a fake 3D (parallax) effect.
         /// </summary>
         [DataMember(Name = "parallaxFactorY")]
-        public double ParallaxFactorY { get; set; }
+        public float ParallaxFactorY { get; set; }
 
         /// <summary>
         /// If true (default), a layer with a parallax factor will also be scaled up/down accordingly.
@@ -900,14 +900,14 @@ namespace LDtkUnity
         /// optional offset)
         /// </summary>
         [DataMember(Name = "pxOffsetX")]
-        public long PxOffsetX { get; set; }
+        public int PxOffsetX { get; set; }
 
         /// <summary>
         /// Y offset of the layer, in pixels (IMPORTANT: this should be added to the `LayerInstance`
         /// optional offset)
         /// </summary>
         [DataMember(Name = "pxOffsetY")]
-        public long PxOffsetY { get; set; }
+        public int PxOffsetY { get; set; }
 
         /// <summary>
         /// An array of tags to filter Entities that can be added to this layer
@@ -920,14 +920,14 @@ namespace LDtkUnity
         /// position the tile relatively its grid cell.
         /// </summary>
         [DataMember(Name = "tilePivotX")]
-        public double TilePivotX { get; set; }
+        public float TilePivotX { get; set; }
 
         /// <summary>
         /// If the tiles are smaller or larger than the layer grid, the pivot value will be used to
         /// position the tile relatively its grid cell.
         /// </summary>
         [DataMember(Name = "tilePivotY")]
-        public double TilePivotY { get; set; }
+        public float TilePivotY { get; set; }
 
         /// <summary>
         /// Reference to the default Tileset UID being used by this layer definition.<br/>
@@ -936,7 +936,7 @@ namespace LDtkUnity
         /// since version 1.0.0, the old `autoTilesetDefUid` was removed and merged into this value.
         /// </summary>
         [DataMember(Name = "tilesetDefUid")]
-        public long? TilesetDefUid { get; set; }
+        public int? TilesetDefUid { get; set; }
 
         /// <summary>
         /// Type of the layer as Haxe Enum Possible values: `IntGrid`, `Entities`, `Tiles`,
@@ -949,7 +949,7 @@ namespace LDtkUnity
         /// Unique Int identifier
         /// </summary>
         [DataMember(Name = "uid")]
-        public long Uid { get; set; }
+        public int Uid { get; set; }
     }
 
     public partial class AutoLayerRuleGroup
@@ -973,7 +973,7 @@ namespace LDtkUnity
         public AutoLayerRuleDefinition[] Rules { get; set; }
 
         [DataMember(Name = "uid")]
-        public long Uid { get; set; }
+        public int Uid { get; set; }
 
         [DataMember(Name = "usesWizard")]
         public bool UsesWizard { get; set; }
@@ -1003,7 +1003,7 @@ namespace LDtkUnity
         /// Chances for this rule to be applied (0 to 1)
         /// </summary>
         [DataMember(Name = "chance")]
-        public double Chance { get; set; }
+        public float Chance { get; set; }
 
         /// <summary>
         /// Checker mode Possible values: `None`, `Horizontal`, `Vertical`
@@ -1027,13 +1027,13 @@ namespace LDtkUnity
         /// Default IntGrid value when checking cells outside of level bounds
         /// </summary>
         [DataMember(Name = "outOfBoundsValue")]
-        public long? OutOfBoundsValue { get; set; }
+        public int? OutOfBoundsValue { get; set; }
 
         /// <summary>
         /// Rule pattern (size x size)
         /// </summary>
         [DataMember(Name = "pattern")]
-        public long[] Pattern { get; set; }
+        public int[] Pattern { get; set; }
 
         /// <summary>
         /// If TRUE, enable Perlin filtering to only apply rule on specific random area
@@ -1042,37 +1042,37 @@ namespace LDtkUnity
         public bool PerlinActive { get; set; }
 
         [DataMember(Name = "perlinOctaves")]
-        public double PerlinOctaves { get; set; }
+        public float PerlinOctaves { get; set; }
 
         [DataMember(Name = "perlinScale")]
-        public double PerlinScale { get; set; }
+        public float PerlinScale { get; set; }
 
         [DataMember(Name = "perlinSeed")]
-        public double PerlinSeed { get; set; }
+        public float PerlinSeed { get; set; }
 
         /// <summary>
         /// X pivot of a tile stamp (0-1)
         /// </summary>
         [DataMember(Name = "pivotX")]
-        public double PivotX { get; set; }
+        public float PivotX { get; set; }
 
         /// <summary>
         /// Y pivot of a tile stamp (0-1)
         /// </summary>
         [DataMember(Name = "pivotY")]
-        public double PivotY { get; set; }
+        public float PivotY { get; set; }
 
         /// <summary>
         /// Pattern width & height. Should only be 1,3,5 or 7.
         /// </summary>
         [DataMember(Name = "size")]
-        public long Size { get; set; }
+        public int Size { get; set; }
 
         /// <summary>
         /// Array of all the tile IDs. They are used randomly or as stamps, based on `tileMode` value.
         /// </summary>
         [DataMember(Name = "tileIds")]
-        public long[] TileIds { get; set; }
+        public int[] TileIds { get; set; }
 
         /// <summary>
         /// Defines how tileIds array is used Possible values: `Single`, `Stamp`
@@ -1084,31 +1084,31 @@ namespace LDtkUnity
         /// Unique Int identifier
         /// </summary>
         [DataMember(Name = "uid")]
-        public long Uid { get; set; }
+        public int Uid { get; set; }
 
         /// <summary>
         /// X cell coord modulo
         /// </summary>
         [DataMember(Name = "xModulo")]
-        public long XModulo { get; set; }
+        public int XModulo { get; set; }
 
         /// <summary>
         /// X cell start offset
         /// </summary>
         [DataMember(Name = "xOffset")]
-        public long XOffset { get; set; }
+        public int XOffset { get; set; }
 
         /// <summary>
         /// Y cell coord modulo
         /// </summary>
         [DataMember(Name = "yModulo")]
-        public long YModulo { get; set; }
+        public int YModulo { get; set; }
 
         /// <summary>
         /// Y cell start offset
         /// </summary>
         [DataMember(Name = "yOffset")]
-        public long YOffset { get; set; }
+        public int YOffset { get; set; }
     }
 
     /// <summary>
@@ -1129,7 +1129,7 @@ namespace LDtkUnity
         /// The IntGrid value itself
         /// </summary>
         [DataMember(Name = "value")]
-        public long Value { get; set; }
+        public int Value { get; set; }
     }
 
     /// <summary>
@@ -1143,13 +1143,13 @@ namespace LDtkUnity
         /// Grid-based height
         /// </summary>
         [DataMember(Name = "__cHei")]
-        public long CHei { get; set; }
+        public int CHei { get; set; }
 
         /// <summary>
         /// Grid-based width
         /// </summary>
         [DataMember(Name = "__cWid")]
-        public long CWid { get; set; }
+        public int CWid { get; set; }
 
         /// <summary>
         /// The following data is used internally for various optimizations. It's always synced with
@@ -1188,19 +1188,19 @@ namespace LDtkUnity
         /// Distance in pixels from image borders
         /// </summary>
         [DataMember(Name = "padding")]
-        public long Padding { get; set; }
+        public int Padding { get; set; }
 
         /// <summary>
         /// Image height in pixels
         /// </summary>
         [DataMember(Name = "pxHei")]
-        public long PxHei { get; set; }
+        public int PxHei { get; set; }
 
         /// <summary>
         /// Image width in pixels
         /// </summary>
         [DataMember(Name = "pxWid")]
-        public long PxWid { get; set; }
+        public int PxWid { get; set; }
 
         /// <summary>
         /// Path to the source file, relative to the current project JSON file<br/>  It can be null
@@ -1219,7 +1219,7 @@ namespace LDtkUnity
         /// Space in pixels between all tiles
         /// </summary>
         [DataMember(Name = "spacing")]
-        public long Spacing { get; set; }
+        public int Spacing { get; set; }
 
         /// <summary>
         /// An array of user-defined tags to organize the Tilesets
@@ -1231,16 +1231,16 @@ namespace LDtkUnity
         /// Optional Enum definition UID used for this tileset meta-data
         /// </summary>
         [DataMember(Name = "tagsSourceEnumUid")]
-        public long? TagsSourceEnumUid { get; set; }
+        public int? TagsSourceEnumUid { get; set; }
 
         [DataMember(Name = "tileGridSize")]
-        public long TileGridSize { get; set; }
+        public int TileGridSize { get; set; }
 
         /// <summary>
         /// Unique Intidentifier
         /// </summary>
         [DataMember(Name = "uid")]
-        public long Uid { get; set; }
+        public int Uid { get; set; }
     }
 
     /// <summary>
@@ -1252,7 +1252,7 @@ namespace LDtkUnity
         public string Data { get; set; }
 
         [DataMember(Name = "tileId")]
-        public long TileId { get; set; }
+        public int TileId { get; set; }
     }
 
     /// <summary>
@@ -1264,7 +1264,7 @@ namespace LDtkUnity
         public string EnumValueId { get; set; }
 
         [DataMember(Name = "tileIds")]
-        public long[] TileIds { get; set; }
+        public int[] TileIds { get; set; }
     }
 
     /// <summary>
@@ -1385,7 +1385,7 @@ namespace LDtkUnity
         /// Grid-based coordinates (`[x,y]` format)
         /// </summary>
         [DataMember(Name = "__grid")]
-        public long[] Grid { get; set; }
+        public int[] Grid { get; set; }
 
         /// <summary>
         /// Entity definition identifier
@@ -1397,7 +1397,7 @@ namespace LDtkUnity
         /// Pivot coordinates  (`[x,y]` format, values are from 0 to 1) of the Entity
         /// </summary>
         [DataMember(Name = "__pivot")]
-        public double[] Pivot { get; set; }
+        public float[] Pivot { get; set; }
 
         /// <summary>
         /// The entity "smart" color, guessed from either Entity definition, or one its field
@@ -1423,7 +1423,7 @@ namespace LDtkUnity
         /// Reference of the **Entity definition** UID
         /// </summary>
         [DataMember(Name = "defUid")]
-        public long DefUid { get; set; }
+        public int DefUid { get; set; }
 
         /// <summary>
         /// An array of all custom fields and their values.
@@ -1436,7 +1436,7 @@ namespace LDtkUnity
         /// definition.
         /// </summary>
         [DataMember(Name = "height")]
-        public long Height { get; set; }
+        public int Height { get; set; }
 
         /// <summary>
         /// Unique instance identifier
@@ -1449,14 +1449,14 @@ namespace LDtkUnity
         /// optional layer offsets, if they exist!
         /// </summary>
         [DataMember(Name = "px")]
-        public long[] Px { get; set; }
+        public int[] Px { get; set; }
 
         /// <summary>
         /// Entity width in pixels. For non-resizable entities, it will be the same as Entity
         /// definition.
         /// </summary>
         [DataMember(Name = "width")]
-        public long Width { get; set; }
+        public int Width { get; set; }
     }
 
     public partial class FieldInstance
@@ -1500,7 +1500,7 @@ namespace LDtkUnity
         /// Reference of the **Field definition** UID
         /// </summary>
         [DataMember(Name = "defUid")]
-        public long DefUid { get; set; }
+        public int DefUid { get; set; }
 
         /// <summary>
         /// Editor internal raw values
@@ -1548,13 +1548,13 @@ namespace LDtkUnity
         /// X grid-based coordinate
         /// </summary>
         [DataMember(Name = "cx")]
-        public long Cx { get; set; }
+        public int Cx { get; set; }
 
         /// <summary>
         /// Y grid-based coordinate
         /// </summary>
         [DataMember(Name = "cy")]
-        public long Cy { get; set; }
+        public int Cy { get; set; }
     }
 
     /// <summary>
@@ -1566,13 +1566,13 @@ namespace LDtkUnity
         /// Coordinate ID in the layer grid
         /// </summary>
         [DataMember(Name = "coordId")]
-        public long CoordId { get; set; }
+        public int CoordId { get; set; }
 
         /// <summary>
         /// IntGrid value
         /// </summary>
         [DataMember(Name = "v")]
-        public long V { get; set; }
+        public int V { get; set; }
     }
 
     public partial class LayerInstance
@@ -1581,19 +1581,19 @@ namespace LDtkUnity
         /// Grid-based height
         /// </summary>
         [DataMember(Name = "__cHei")]
-        public long CHei { get; set; }
+        public int CHei { get; set; }
 
         /// <summary>
         /// Grid-based width
         /// </summary>
         [DataMember(Name = "__cWid")]
-        public long CWid { get; set; }
+        public int CWid { get; set; }
 
         /// <summary>
         /// Grid size
         /// </summary>
         [DataMember(Name = "__gridSize")]
-        public long GridSize { get; set; }
+        public int GridSize { get; set; }
 
         /// <summary>
         /// Layer definition identifier
@@ -1605,25 +1605,25 @@ namespace LDtkUnity
         /// Layer opacity as Float [0-1]
         /// </summary>
         [DataMember(Name = "__opacity")]
-        public double Opacity { get; set; }
+        public float Opacity { get; set; }
 
         /// <summary>
         /// Total layer X pixel offset, including both instance and definition offsets.
         /// </summary>
         [DataMember(Name = "__pxTotalOffsetX")]
-        public long PxTotalOffsetX { get; set; }
+        public int PxTotalOffsetX { get; set; }
 
         /// <summary>
         /// Total layer Y pixel offset, including both instance and definition offsets.
         /// </summary>
         [DataMember(Name = "__pxTotalOffsetY")]
-        public long PxTotalOffsetY { get; set; }
+        public int PxTotalOffsetY { get; set; }
 
         /// <summary>
         /// The definition UID of corresponding Tileset, if any.
         /// </summary>
         [DataMember(Name = "__tilesetDefUid")]
-        public long? TilesetDefUid { get; set; }
+        public int? TilesetDefUid { get; set; }
 
         /// <summary>
         /// The relative path to corresponding Tileset, if any.
@@ -1672,32 +1672,32 @@ namespace LDtkUnity
         /// start at 1.<br/>  The array size is `__cWid` x `__cHei` cells.
         /// </summary>
         [DataMember(Name = "intGridCsv")]
-        public long[] IntGridCsv { get; set; }
+        public int[] IntGridCsv { get; set; }
 
         /// <summary>
         /// Reference the Layer definition UID
         /// </summary>
         [DataMember(Name = "layerDefUid")]
-        public long LayerDefUid { get; set; }
+        public int LayerDefUid { get; set; }
 
         /// <summary>
         /// Reference to the UID of the level containing this layer instance
         /// </summary>
         [DataMember(Name = "levelId")]
-        public long LevelId { get; set; }
+        public int LevelId { get; set; }
 
         /// <summary>
         /// An Array containing the UIDs of optional rules that were enabled in this specific layer
         /// instance.
         /// </summary>
         [DataMember(Name = "optionalRules")]
-        public long[] OptionalRules { get; set; }
+        public int[] OptionalRules { get; set; }
 
         /// <summary>
         /// This layer can use another tileset by overriding the tileset UID here.
         /// </summary>
         [DataMember(Name = "overrideTilesetUid")]
-        public long? OverrideTilesetUid { get; set; }
+        public int? OverrideTilesetUid { get; set; }
 
         /// <summary>
         /// X offset in pixels to render this layer, usually 0 (IMPORTANT: this should be added to
@@ -1705,7 +1705,7 @@ namespace LDtkUnity
         /// which contains the total offset value)
         /// </summary>
         [DataMember(Name = "pxOffsetX")]
-        public long PxOffsetX { get; set; }
+        public int PxOffsetX { get; set; }
 
         /// <summary>
         /// Y offset in pixels to render this layer, usually 0 (IMPORTANT: this should be added to
@@ -1713,13 +1713,13 @@ namespace LDtkUnity
         /// which contains the total offset value)
         /// </summary>
         [DataMember(Name = "pxOffsetY")]
-        public long PxOffsetY { get; set; }
+        public int PxOffsetY { get; set; }
 
         /// <summary>
         /// Random seed used for Auto-Layers rendering
         /// </summary>
         [DataMember(Name = "seed")]
-        public long Seed { get; set; }
+        public int Seed { get; set; }
 
         /// <summary>
         /// Layer instance visibility
@@ -1738,7 +1738,7 @@ namespace LDtkUnity
         /// For tile-layer tiles: `[coordId]`.
         /// </summary>
         [DataMember(Name = "d")]
-        public long[] D { get; set; }
+        public int[] D { get; set; }
 
         /// <summary>
         /// "Flip bits", a 2-bits integer to represent the mirror transformations of the tile.<br/>
@@ -1746,26 +1746,26 @@ namespace LDtkUnity
         /// only), f=2 (Y flip only), f=3 (both flips)
         /// </summary>
         [DataMember(Name = "f")]
-        public long F { get; set; }
+        public int F { get; set; }
 
         /// <summary>
         /// Pixel coordinates of the tile in the **layer** (`[x,y]` format). Don't forget optional
         /// layer offsets, if they exist!
         /// </summary>
         [DataMember(Name = "px")]
-        public long[] Px { get; set; }
+        public int[] Px { get; set; }
 
         /// <summary>
         /// Pixel coordinates of the tile in the **tileset** (`[x,y]` format)
         /// </summary>
         [DataMember(Name = "src")]
-        public long[] Src { get; set; }
+        public int[] Src { get; set; }
 
         /// <summary>
         /// The *Tile ID* in the corresponding tileset.
         /// </summary>
         [DataMember(Name = "t")]
-        public long T { get; set; }
+        public int T { get; set; }
     }
 
     /// <summary>
@@ -1819,13 +1819,13 @@ namespace LDtkUnity
         /// Background image X pivot (0-1)
         /// </summary>
         [DataMember(Name = "bgPivotX")]
-        public double BgPivotX { get; set; }
+        public float BgPivotX { get; set; }
 
         /// <summary>
         /// Background image Y pivot (0-1)
         /// </summary>
         [DataMember(Name = "bgPivotY")]
-        public double BgPivotY { get; set; }
+        public float BgPivotY { get; set; }
 
         /// <summary>
         /// An enum defining the way the background image (if any) is positioned on the level. See
@@ -1878,19 +1878,19 @@ namespace LDtkUnity
         /// Height of the level in pixels
         /// </summary>
         [DataMember(Name = "pxHei")]
-        public long PxHei { get; set; }
+        public int PxHei { get; set; }
 
         /// <summary>
         /// Width of the level in pixels
         /// </summary>
         [DataMember(Name = "pxWid")]
-        public long PxWid { get; set; }
+        public int PxWid { get; set; }
 
         /// <summary>
         /// Unique Int identifier
         /// </summary>
         [DataMember(Name = "uid")]
-        public long Uid { get; set; }
+        public int Uid { get; set; }
 
         /// <summary>
         /// If TRUE, the level identifier will always automatically use the naming pattern as defined
@@ -1906,7 +1906,7 @@ namespace LDtkUnity
         /// intended to make stacking of levels easier to manage.
         /// </summary>
         [DataMember(Name = "worldDepth")]
-        public long WorldDepth { get; set; }
+        public int WorldDepth { get; set; }
 
         /// <summary>
         /// World X coordinate in pixels.<br/>  Only relevant for world layouts where level spatial
@@ -1914,7 +1914,7 @@ namespace LDtkUnity
         /// value is always -1 here.
         /// </summary>
         [DataMember(Name = "worldX")]
-        public long WorldX { get; set; }
+        public int WorldX { get; set; }
 
         /// <summary>
         /// World Y coordinate in pixels.<br/>  Only relevant for world layouts where level spatial
@@ -1922,7 +1922,7 @@ namespace LDtkUnity
         /// value is always -1 here.
         /// </summary>
         [DataMember(Name = "worldY")]
-        public long WorldY { get; set; }
+        public int WorldY { get; set; }
     }
 
     /// <summary>
@@ -1936,21 +1936,21 @@ namespace LDtkUnity
         /// Array format: `[ cropX, cropY, cropWidth, cropHeight ]`
         /// </summary>
         [DataMember(Name = "cropRect")]
-        public double[] CropRect { get; set; }
+        public float[] CropRect { get; set; }
 
         /// <summary>
         /// An array containing the `[scaleX,scaleY]` values of the **cropped** background image,
         /// depending on `bgPos` option.
         /// </summary>
         [DataMember(Name = "scale")]
-        public double[] Scale { get; set; }
+        public float[] Scale { get; set; }
 
         /// <summary>
         /// An array containing the `[x,y]` pixel coordinates of the top-left corner of the
         /// **cropped** background image, depending on `bgPos` option.
         /// </summary>
         [DataMember(Name = "topLeftPx")]
-        public long[] TopLeftPx { get; set; }
+        public int[] TopLeftPx { get; set; }
     }
 
     /// <summary>
@@ -1976,7 +1976,7 @@ namespace LDtkUnity
         /// by: `levelIid`
         /// </summary>
         [DataMember(Name = "levelUid")]
-        public long? LevelUid { get; set; }
+        public int? LevelUid { get; set; }
     }
 
     public partial class LdtkTableOfContentEntry
@@ -1999,13 +1999,13 @@ namespace LDtkUnity
         /// Default new level height
         /// </summary>
         [DataMember(Name = "defaultLevelHeight")]
-        public long DefaultLevelHeight { get; set; }
+        public int DefaultLevelHeight { get; set; }
 
         /// <summary>
         /// Default new level width
         /// </summary>
         [DataMember(Name = "defaultLevelWidth")]
-        public long DefaultLevelWidth { get; set; }
+        public int DefaultLevelWidth { get; set; }
 
         /// <summary>
         /// User defined unique identifier
@@ -2031,13 +2031,13 @@ namespace LDtkUnity
         /// Height of the world grid in pixels.
         /// </summary>
         [DataMember(Name = "worldGridHeight")]
-        public long WorldGridHeight { get; set; }
+        public int WorldGridHeight { get; set; }
 
         /// <summary>
         /// Width of the world grid in pixels.
         /// </summary>
         [DataMember(Name = "worldGridWidth")]
-        public long WorldGridWidth { get; set; }
+        public int WorldGridWidth { get; set; }
 
         /// <summary>
         /// An enum that describes how levels are organized in this project (ie. linearly or in a 2D
