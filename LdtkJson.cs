@@ -55,6 +55,12 @@ namespace LDtkUnity
         public bool BackupOnSave { get; set; }
 
         /// <summary>
+        /// Target relative path to store backup files
+        /// </summary>
+        [DataMember(Name = "backupRelPath")]
+        public string BackupRelPath { get; set; }
+
+        /// <summary>
         /// Project background color
         /// </summary>
         [DataMember(Name = "bgColor")]
@@ -111,6 +117,12 @@ namespace LDtkUnity
         /// </summary>
         [DataMember(Name = "defs")]
         public Definitions Defs { get; set; }
+
+        /// <summary>
+        /// If the project isn't in MultiWorlds mode, this is the IID of the internal "dummy" World.
+        /// </summary>
+        [DataMember(Name = "dummyWorldIid")]
+        public string DummyWorldIid { get; set; }
 
         /// <summary>
         /// If TRUE, the exported PNGs will include the level background (color or image).
@@ -254,17 +266,15 @@ namespace LDtkUnity
         public WorldLayout? WorldLayout { get; set; }
 
         /// <summary>
-        /// This array is not used yet in current LDtk version (so, for now, it's always
-        /// empty).<br/><br/>In a later update, it will be possible to have multiple Worlds in a
-        /// single project, each containing multiple Levels.<br/><br/>What will change when "Multiple
-        /// worlds" support will be added to LDtk:<br/><br/> - in current version, a LDtk project
-        /// file can only contain a single world with multiple levels in it. In this case, levels and
-        /// world layout related settings are stored in the root of the JSON.<br/> - after the
-        /// "Multiple worlds" update, there will be a `worlds` array in root, each world containing
-        /// levels and layout settings. Basically, it's pretty much only about moving the `levels`
-        /// array to the `worlds` array, along with world layout related values (eg. `worldGridWidth`
-        /// etc).<br/><br/>If you want to start supporting this future update easily, please refer to
-        /// this documentation: https://github.com/deepnight/ldtk/issues/231
+        /// This array will be empty, unless you enable the Multi-Worlds in the project advanced
+        /// settings.<br/><br/> - in current version, a LDtk project file can only contain a single
+        /// world with multiple levels in it. In this case, levels and world layout related settings
+        /// are stored in the root of the JSON.<br/> - with "Multi-worlds" enabled, there will be a
+        /// `worlds` array in root, each world containing levels and layout settings. Basically, it's
+        /// pretty much only about moving the `levels` array to the `worlds` array, along with world
+        /// layout related values (eg. `worldGridWidth` etc).<br/><br/>If you want to start
+        /// supporting this future update easily, please refer to this documentation:
+        /// https://github.com/deepnight/ldtk/issues/231
         /// </summary>
         [DataMember(Name = "worlds")]
         public World[] Worlds { get; set; }
@@ -523,10 +533,13 @@ namespace LDtkUnity
         public string[] AcceptFileTypes { get; set; }
 
         /// <summary>
-        /// Possible values: `Any`, `OnlySame`, `OnlyTags`
+        /// Possible values: `Any`, `OnlySame`, `OnlyTags`, `OnlySpecificEntity`
         /// </summary>
         [DataMember(Name = "allowedRefs")]
         public AllowedRefs AllowedRefs { get; set; }
+
+        [DataMember(Name = "allowedRefsEntityUid")]
+        public int? AllowedRefsEntityUid { get; set; }
 
         [DataMember(Name = "allowedRefTags")]
         public string[] AllowedRefTags { get; set; }
@@ -576,8 +589,8 @@ namespace LDtkUnity
         public bool EditorCutLongValues { get; set; }
 
         /// <summary>
-        /// Possible values: `Hidden`, `ValueOnly`, `NameAndValue`, `EntityTile`, `Points`,
-        /// `PointStar`, `PointPath`, `PointPathLoop`, `RadiusPx`, `RadiusGrid`,
+        /// Possible values: `Hidden`, `ValueOnly`, `NameAndValue`, `EntityTile`, `LevelTile`,
+        /// `Points`, `PointStar`, `PointPath`, `PointPathLoop`, `RadiusPx`, `RadiusGrid`,
         /// `ArrayCountWithLabel`, `ArrayCountNoLabel`, `RefLinkBetweenPivots`,
         /// `RefLinkBetweenCenters`
         /// </summary>
@@ -589,6 +602,9 @@ namespace LDtkUnity
         /// </summary>
         [DataMember(Name = "editorDisplayPos")]
         public EditorDisplayPos EditorDisplayPos { get; set; }
+
+        [DataMember(Name = "editorDisplayScale")]
+        public float EditorDisplayScale { get; set; }
 
         /// <summary>
         /// Possible values: `ZigZag`, `StraightArrow`, `CurvedArrow`, `ArrowsLine`, `DashedLine`
@@ -755,8 +771,8 @@ namespace LDtkUnity
     public partial class EnumValueDefinition
     {
         /// <summary>
-        /// An array of 4 Int values that refers to the tile in the tileset image: `[ x, y, width,
-        /// height ]`
+        /// **WARNING**: this deprecated value will be *removed* completely on version 1.4.0+
+        /// Replaced by: `tileRect`
         /// </summary>
         [DataMember(Name = "__tileSrcRect")]
         public int[] TileSrcRect { get; set; }
@@ -774,10 +790,17 @@ namespace LDtkUnity
         public string Id { get; set; }
 
         /// <summary>
-        /// The optional ID of the tile
+        /// **WARNING**: this deprecated value will be *removed* completely on version 1.4.0+
+        /// Replaced by: `tileRect`
         /// </summary>
         [DataMember(Name = "tileId")]
         public int? TileId { get; set; }
+
+        /// <summary>
+        /// Optional tileset rectangle to represents this value
+        /// </summary>
+        [DataMember(Name = "tileRect")]
+        public TilesetRectangle TileRect { get; set; }
     }
 
     public partial class LayerDefinition
@@ -1079,6 +1102,42 @@ namespace LDtkUnity
         /// </summary>
         [DataMember(Name = "tileMode")]
         public TileMode TileMode { get; set; }
+
+        /// <summary>
+        /// Max random offset for X tile pos
+        /// </summary>
+        [DataMember(Name = "tileRandomXMax")]
+        public int TileRandomXMax { get; set; }
+
+        /// <summary>
+        /// Min random offset for X tile pos
+        /// </summary>
+        [DataMember(Name = "tileRandomXMin")]
+        public int TileRandomXMin { get; set; }
+
+        /// <summary>
+        /// Max random offset for Y tile pos
+        /// </summary>
+        [DataMember(Name = "tileRandomYMax")]
+        public int TileRandomYMax { get; set; }
+
+        /// <summary>
+        /// Min random offset for Y tile pos
+        /// </summary>
+        [DataMember(Name = "tileRandomYMin")]
+        public int TileRandomYMin { get; set; }
+
+        /// <summary>
+        /// Tile X offset
+        /// </summary>
+        [DataMember(Name = "tileXOffset")]
+        public int TileXOffset { get; set; }
+
+        /// <summary>
+        /// Tile Y offset
+        /// </summary>
+        [DataMember(Name = "tileYOffset")]
+        public int TileYOffset { get; set; }
 
         /// <summary>
         /// Unique Int identifier
@@ -1830,7 +1889,7 @@ namespace LDtkUnity
         /// <summary>
         /// An enum defining the way the background image (if any) is positioned on the level. See
         /// `__bgPos` for resulting position info. Possible values: &lt;`null`&gt;, `Unscaled`,
-        /// `Contain`, `Cover`, `CoverDirty`
+        /// `Contain`, `Cover`, `CoverDirty`, `Repeat`
         /// </summary>
         [DataMember(Name = "bgPos")]
         public BgPos? LevelBgPos { get; set; }
@@ -1989,9 +2048,9 @@ namespace LDtkUnity
     }
 
     /// <summary>
-    /// **IMPORTANT**: this type is not used *yet* in current LDtk version. It's only presented
-    /// here as a preview of a planned feature.  A World contains multiple levels, and it has its
-    /// own layout settings.
+    /// **IMPORTANT**: this type is available as a preview. You can rely on it to update your
+    /// importers, for when it will be officially available.  A World contains multiple levels,
+    /// and it has its own layout settings.
     /// </summary>
     public partial class World
     {
@@ -2053,17 +2112,17 @@ namespace LDtkUnity
     public enum When { AfterLoad, AfterSave, BeforeSave, Manual };
 
     /// <summary>
-    /// Possible values: `Any`, `OnlySame`, `OnlyTags`
+    /// Possible values: `Any`, `OnlySame`, `OnlyTags`, `OnlySpecificEntity`
     /// </summary>
-    public enum AllowedRefs { Any, OnlySame, OnlyTags };
+    public enum AllowedRefs { Any, OnlySame, OnlySpecificEntity, OnlyTags };
 
     /// <summary>
-    /// Possible values: `Hidden`, `ValueOnly`, `NameAndValue`, `EntityTile`, `Points`,
-    /// `PointStar`, `PointPath`, `PointPathLoop`, `RadiusPx`, `RadiusGrid`,
+    /// Possible values: `Hidden`, `ValueOnly`, `NameAndValue`, `EntityTile`, `LevelTile`,
+    /// `Points`, `PointStar`, `PointPath`, `PointPathLoop`, `RadiusPx`, `RadiusGrid`,
     /// `ArrayCountWithLabel`, `ArrayCountNoLabel`, `RefLinkBetweenPivots`,
     /// `RefLinkBetweenCenters`
     /// </summary>
-    public enum EditorDisplayMode { ArrayCountNoLabel, ArrayCountWithLabel, EntityTile, Hidden, NameAndValue, PointPath, PointPathLoop, PointStar, Points, RadiusGrid, RadiusPx, RefLinkBetweenCenters, RefLinkBetweenPivots, ValueOnly };
+    public enum EditorDisplayMode { ArrayCountNoLabel, ArrayCountWithLabel, EntityTile, Hidden, LevelTile, NameAndValue, PointPath, PointPathLoop, PointStar, Points, RadiusGrid, RadiusPx, RefLinkBetweenCenters, RefLinkBetweenPivots, ValueOnly };
 
     /// <summary>
     /// Possible values: `Above`, `Center`, `Beneath`
@@ -2120,7 +2179,7 @@ namespace LDtkUnity
 
     public enum Flag { DiscardPreCsvIntGrid, ExportPreCsvIntGridFormat, IgnoreBackupSuggest, MultiWorlds, PrependIndexToLevelFileNames, UseMultilinesType };
 
-    public enum BgPos { Contain, Cover, CoverDirty, Unscaled };
+    public enum BgPos { Contain, Cover, CoverDirty, Repeat, Unscaled };
 
     public enum WorldLayout { Free, GridVania, LinearHorizontal, LinearVertical };
 
