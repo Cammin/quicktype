@@ -933,6 +933,13 @@ namespace LDtkUnity
         public int PxOffsetY { get; set; }
 
         /// <summary>
+        /// If TRUE, the content of this layer will be used when rendering levels in a simplified way
+        /// for the world view
+        /// </summary>
+        [DataMember(Name = "renderInWorldView")]
+        public bool RenderInWorldView { get; set; }
+
+        /// <summary>
         /// An array of tags to filter Entities that can be added to this layer
         /// </summary>
         [DataMember(Name = "requiredTags")]
@@ -967,6 +974,12 @@ namespace LDtkUnity
         /// </summary>
         [DataMember(Name = "type")]
         public TypeEnum LayerDefinitionType { get; set; }
+
+        /// <summary>
+        /// User defined color for the UI
+        /// </summary>
+        [DataMember(Name = "uiColor")]
+        public string UiColor { get; set; }
 
         /// <summary>
         /// Unique Int identifier
@@ -1014,6 +1027,9 @@ namespace LDtkUnity
         /// </summary>
         [DataMember(Name = "active")]
         public bool Active { get; set; }
+
+        [DataMember(Name = "alpha")]
+        public float Alpha { get; set; }
 
         /// <summary>
         /// When TRUE, the rule will prevent other rules to be applied in the same cell if it matches
@@ -1792,6 +1808,12 @@ namespace LDtkUnity
     /// </summary>
     public partial class TileInstance
     {
+        /// <summary>
+        /// Alpha/opacity of the tile (0-1, defaults to 1)
+        /// </summary>
+        [DataMember(Name = "a")]
+        public float A { get; set; }
+
         /// <summary>
         /// Internal data used by the editor.<br/>  For auto-layer tiles: `[ruleId, coordId]`.<br/>
         /// For tile-layer tiles: `[coordId]`.
