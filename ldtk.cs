@@ -73,6 +73,18 @@ namespace LDtkUnity
         public LdtkCustomCommand[] CustomCommands { get; set; }
 
         /// <summary>
+        /// Default height for new entities
+        /// </summary>
+        [DataMember(Name = "defaultEntityHeight")]
+        public int DefaultEntityHeight { get; set; }
+
+        /// <summary>
+        /// Default width for new entities
+        /// </summary>
+        [DataMember(Name = "defaultEntityWidth")]
+        public int DefaultEntityWidth { get; set; }
+
+        /// <summary>
         /// Default grid size for new layers
         /// </summary>
         [DataMember(Name = "defaultGridSize")]
@@ -417,6 +429,30 @@ namespace LDtkUnity
         public int MaxCount { get; set; }
 
         /// <summary>
+        /// Max pixel height (only applies if the entity is resizable on Y)
+        /// </summary>
+        [DataMember(Name = "maxHeight")]
+        public int? MaxHeight { get; set; }
+
+        /// <summary>
+        /// Max pixel width (only applies if the entity is resizable on X)
+        /// </summary>
+        [DataMember(Name = "maxWidth")]
+        public int? MaxWidth { get; set; }
+
+        /// <summary>
+        /// Min pixel height (only applies if the entity is resizable on Y)
+        /// </summary>
+        [DataMember(Name = "minHeight")]
+        public int? MinHeight { get; set; }
+
+        /// <summary>
+        /// Min pixel width (only applies if the entity is resizable on X)
+        /// </summary>
+        [DataMember(Name = "minWidth")]
+        public int? MinWidth { get; set; }
+
+        /// <summary>
         /// An array of 4 dimensions for the up/right/down/left borders (in this order) when using
         /// 9-slice mode for `tileRenderMode`.<br/>  If the tileRenderMode is not NineSlice, then
         /// this array is empty.<br/>  See: https://en.wikipedia.org/wiki/9-slice_scaling
@@ -503,6 +539,12 @@ namespace LDtkUnity
         public int Uid { get; set; }
 
         /// <summary>
+        /// This tile overrides the one defined in `tileRect` in the UI
+        /// </summary>
+        [DataMember(Name = "uiTileRect")]
+        public TilesetRectangle UiTileRect { get; set; }
+
+        /// <summary>
         /// Pixel width
         /// </summary>
         [DataMember(Name = "width")]
@@ -587,6 +629,9 @@ namespace LDtkUnity
 
         [DataMember(Name = "editorCutLongValues")]
         public bool EditorCutLongValues { get; set; }
+
+        [DataMember(Name = "editorDisplayColor")]
+        public string EditorDisplayColor { get; set; }
 
         /// <summary>
         /// Possible values: `Hidden`, `ValueOnly`, `NameAndValue`, `EntityTile`, `LevelTile`,
@@ -771,8 +816,8 @@ namespace LDtkUnity
     public partial class EnumValueDefinition
     {
         /// <summary>
-        /// **WARNING**: this deprecated value will be *removed* completely on version 1.4.0+
-        /// Replaced by: `tileRect`
+        /// **WARNING**: this deprecated value is no longer exported since version 1.4.0  Replaced
+        /// by: `tileRect`
         /// </summary>
         [DataMember(Name = "__tileSrcRect")]
         public int[] TileSrcRect { get; set; }
@@ -790,8 +835,8 @@ namespace LDtkUnity
         public string Id { get; set; }
 
         /// <summary>
-        /// **WARNING**: this deprecated value will be *removed* completely on version 1.4.0+
-        /// Replaced by: `tileRect`
+        /// **WARNING**: this deprecated value is no longer exported since version 1.4.0  Replaced
+        /// by: `tileRect`
         /// </summary>
         [DataMember(Name = "tileId")]
         public int? TileId { get; set; }
@@ -899,6 +944,12 @@ namespace LDtkUnity
         public IntGridValueDefinition[] IntGridValues { get; set; }
 
         /// <summary>
+        /// Group informations for IntGrid values
+        /// </summary>
+        [DataMember(Name = "intGridValuesGroups")]
+        public IntGridValueGroupDefinition[] IntGridValuesGroups { get; set; }
+
+        /// <summary>
         /// Parallax horizontal factor (from -1 to 1, defaults to 0) which affects the scrolling
         /// speed of this layer, creating a fake 3D (parallax) effect.
         /// </summary>
@@ -998,6 +1049,12 @@ namespace LDtkUnity
         /// </summary>
         [DataMember(Name = "collapsed")]
         public bool? Collapsed { get; set; }
+
+        [DataMember(Name = "color")]
+        public string Color { get; set; }
+
+        [DataMember(Name = "icon")]
+        public TilesetRectangle Icon { get; set; }
 
         [DataMember(Name = "isOptional")]
         public bool IsOptional { get; set; }
@@ -1195,16 +1252,49 @@ namespace LDtkUnity
         public string Color { get; set; }
 
         /// <summary>
+        /// Parent group identifier (0 if none)
+        /// </summary>
+        [DataMember(Name = "groupUid")]
+        public int GroupUid { get; set; }
+
+        /// <summary>
         /// User defined unique identifier
         /// </summary>
         [DataMember(Name = "identifier")]
         public string Identifier { get; set; }
+
+        [DataMember(Name = "tile")]
+        public TilesetRectangle Tile { get; set; }
 
         /// <summary>
         /// The IntGrid value itself
         /// </summary>
         [DataMember(Name = "value")]
         public int Value { get; set; }
+    }
+
+    /// <summary>
+    /// IntGrid value group definition
+    /// </summary>
+    public partial class IntGridValueGroupDefinition
+    {
+        /// <summary>
+        /// User defined color
+        /// </summary>
+        [DataMember(Name = "color")]
+        public string Color { get; set; }
+
+        /// <summary>
+        /// User defined string identifier
+        /// </summary>
+        [DataMember(Name = "identifier")]
+        public string Identifier { get; set; }
+
+        /// <summary>
+        /// Group unique ID
+        /// </summary>
+        [DataMember(Name = "uid")]
+        public int Uid { get; set; }
     }
 
     /// <summary>
@@ -1406,6 +1496,10 @@ namespace LDtkUnity
         public IntGridValueDefinition IntGridValueDef { get; set; }
 
         [IgnoreDataMember]
+        [DataMember(Name = "IntGridValueGroupDef")]
+        public IntGridValueGroupDefinition IntGridValueGroupDef { get; set; }
+
+        [IgnoreDataMember]
         [DataMember(Name = "IntGridValueInstance")]
         public IntGridValueInstance IntGridValueInstance { get; set; }
 
@@ -1493,6 +1587,18 @@ namespace LDtkUnity
         /// </summary>
         [DataMember(Name = "__tile")]
         public TilesetRectangle Tile { get; set; }
+
+        /// <summary>
+        /// X world coordinate in pixels
+        /// </summary>
+        [DataMember(Name = "__worldX")]
+        public int WorldX { get; set; }
+
+        /// <summary>
+        /// Y world coordinate in pixels
+        /// </summary>
+        [DataMember(Name = "__worldY")]
+        public int WorldY { get; set; }
 
         /// <summary>
         /// Reference of the **Entity definition** UID
@@ -1875,9 +1981,10 @@ namespace LDtkUnity
         public LevelBackgroundPosition BgPos { get; set; }
 
         /// <summary>
-        /// An array listing all other levels touching this one on the world map.<br/>  Only relevant
-        /// for world layouts where level spatial positioning is manual (ie. GridVania, Free). For
-        /// Horizontal and Vertical layouts, this array is always empty.
+        /// An array listing all other levels touching this one on the world map. Since 1.4.0, this
+        /// includes levels that overlap in the same world layer, or in nearby world layers.<br/>
+        /// Only relevant for world layouts where level spatial positioning is manual (ie. GridVania,
+        /// Free). For Horizontal and Vertical layouts, this array is always empty.
         /// </summary>
         [DataMember(Name = "__neighbours")]
         public NeighbourLevel[] Neighbours { get; set; }
@@ -2041,7 +2148,9 @@ namespace LDtkUnity
     {
         /// <summary>
         /// A single lowercase character tipping on the level location (`n`orth, `s`outh, `w`est,
-        /// `e`ast).
+        /// `e`ast).<br/>  Since 1.4.0, this character value can also be `<` (neighbour depth is
+        /// lower), `>` (neighbour depth is greater) or `o` (levels overlap and share the same world
+        /// depth).
         /// </summary>
         [DataMember(Name = "dir")]
         public string Dir { get; set; }
