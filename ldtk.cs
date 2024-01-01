@@ -165,8 +165,9 @@ namespace LDtkUnity
 
         /// <summary>
         /// An array containing various advanced flags (ie. options or other states). Possible
-        /// values: `DiscardPreCsvIntGrid`, `ExportPreCsvIntGridFormat`, `IgnoreBackupSuggest`,
-        /// `PrependIndexToLevelFileNames`, `MultiWorlds`, `UseMultilinesType`
+        /// values: `DiscardPreCsvIntGrid`, `ExportOldTableOfContentData`,
+        /// `ExportPreCsvIntGridFormat`, `IgnoreBackupSuggest`, `PrependIndexToLevelFileNames`,
+        /// `MultiWorlds`, `UseMultilinesType`
         /// </summary>
         [DataMember(Name = "flags")]
         public Flag[] Flags { get; set; }
@@ -356,6 +357,12 @@ namespace LDtkUnity
 
     public partial class EntityDefinition
     {
+        /// <summary>
+        /// If enabled, this entity is allowed to stay outside of the current level bounds
+        /// </summary>
+        [DataMember(Name = "allowOutOfBounds")]
+        public bool AllowOutOfBounds { get; set; }
+
         /// <summary>
         /// Base entity color
         /// </summary>
@@ -667,6 +674,13 @@ namespace LDtkUnity
         public string EditorTextSuffix { get; set; }
 
         /// <summary>
+        /// If TRUE, the field value will be exported to the `toc` project JSON field. Only applies
+        /// to Entity fields.
+        /// </summary>
+        [DataMember(Name = "exportToToc")]
+        public bool ExportToToc { get; set; }
+
+        /// <summary>
         /// User defined unique identifier
         /// </summary>
         [DataMember(Name = "identifier")]
@@ -696,6 +710,12 @@ namespace LDtkUnity
         /// </summary>
         [DataMember(Name = "regex")]
         public string Regex { get; set; }
+
+        /// <summary>
+        /// If enabled, this field will be searchable through LDtk command palette
+        /// </summary>
+        [DataMember(Name = "searchable")]
+        public bool Searchable { get; set; }
 
         [DataMember(Name = "symmetricalRef")]
         public bool SymmetricalRef { get; set; }
@@ -872,6 +892,12 @@ namespace LDtkUnity
         [DataMember(Name = "autoTilesetDefUid")]
         public int? AutoTilesetDefUid { get; set; }
 
+        [DataMember(Name = "autoTilesKilledByOtherLayerUid")]
+        public int? AutoTilesKilledByOtherLayerUid { get; set; }
+
+        [DataMember(Name = "biomeFieldUid")]
+        public int? BiomeFieldUid { get; set; }
+
         /// <summary>
         /// Allow editor selections when the layer is not currently active.
         /// </summary>
@@ -1037,12 +1063,21 @@ namespace LDtkUnity
         /// </summary>
         [DataMember(Name = "uid")]
         public int Uid { get; set; }
+
+        /// <summary>
+        /// Display tags
+        /// </summary>
+        [DataMember(Name = "uiFilterTags")]
+        public string[] UiFilterTags { get; set; }
     }
 
     public partial class AutoLayerRuleGroup
     {
         [DataMember(Name = "active")]
         public bool Active { get; set; }
+
+        [DataMember(Name = "biomeRequirementMode")]
+        public int BiomeRequirementMode { get; set; }
 
         /// <summary>
         /// *This field was removed in 1.0.0 and should no longer be used.*
@@ -1061,6 +1096,9 @@ namespace LDtkUnity
 
         [DataMember(Name = "name")]
         public string Name { get; set; }
+
+        [DataMember(Name = "requiredBiomeValues")]
+        public string[] RequiredBiomeValues { get; set; }
 
         [DataMember(Name = "rules")]
         public AutoLayerRuleDefinition[] Rules { get; set; }
@@ -1165,7 +1203,8 @@ namespace LDtkUnity
         public int Size { get; set; }
 
         /// <summary>
-        /// Array of all the tile IDs. They are used randomly or as stamps, based on `tileMode` value.
+        /// **WARNING**: this deprecated value is no longer exported since version 1.5.0  Replaced
+        /// by: `tileRectsIds`
         /// </summary>
         [DataMember(Name = "tileIds")]
         public int[] TileIds { get; set; }
@@ -1199,6 +1238,12 @@ namespace LDtkUnity
         /// </summary>
         [DataMember(Name = "tileRandomYMin")]
         public int TileRandomYMin { get; set; }
+
+        /// <summary>
+        /// Array containing all the possible tile IDs rectangles (picked randomly).
+        /// </summary>
+        [DataMember(Name = "tileRectsIds")]
+        public int[][] TileRectsIds { get; set; }
 
         /// <summary>
         /// Tile X offset
@@ -1544,6 +1589,10 @@ namespace LDtkUnity
         public TilesetRectangle TilesetRect { get; set; }
 
         [IgnoreDataMember]
+        [DataMember(Name = "TocInstanceData")]
+        public LdtkTocInstanceData TocInstanceData { get; set; }
+
+        [IgnoreDataMember]
         [DataMember(Name = "World")]
         public World World { get; set; }
     }
@@ -1589,16 +1638,16 @@ namespace LDtkUnity
         public TilesetRectangle Tile { get; set; }
 
         /// <summary>
-        /// X world coordinate in pixels
+        /// X world coordinate in pixels. Only available in GridVania or Free world layouts.
         /// </summary>
         [DataMember(Name = "__worldX")]
-        public int WorldX { get; set; }
+        public int? WorldX { get; set; }
 
         /// <summary>
-        /// Y world coordinate in pixels
+        /// Y world coordinate in pixels Only available in GridVania or Free world layouts.
         /// </summary>
         [DataMember(Name = "__worldY")]
-        public int WorldY { get; set; }
+        public int? WorldY { get; set; }
 
         /// <summary>
         /// Reference of the **Entity definition** UID
@@ -1692,6 +1741,8 @@ namespace LDtkUnity
 
     /// <summary>
     /// This object describes the "location" of an Entity instance in the project worlds.
+    ///
+    /// IID information of this instance
     /// </summary>
     public partial class ReferenceToAnEntityInstance
     {
@@ -2174,8 +2225,44 @@ namespace LDtkUnity
         [DataMember(Name = "identifier")]
         public string Identifier { get; set; }
 
+        /// <summary>
+        /// **WARNING**: this deprecated value will be *removed* completely on version 1.7.0+
+        /// Replaced by: `instancesData`
+        /// </summary>
+        [IgnoreDataMember]
         [DataMember(Name = "instances")]
         public ReferenceToAnEntityInstance[] Instances { get; set; }
+
+        [DataMember(Name = "instancesData")]
+        public LdtkTocInstanceData[] InstancesData { get; set; }
+    }
+
+    public partial class LdtkTocInstanceData
+    {
+        /// <summary>
+        /// An object containing the values of all entity fields with the `exportToToc` option
+        /// enabled. This object typing depends on actual field value types.
+        /// </summary>
+        [DataMember(Name = "fields")]
+        public object Fields { get; set; }
+
+        [DataMember(Name = "heiPx")]
+        public int HeiPx { get; set; }
+
+        /// <summary>
+        /// IID information of this instance
+        /// </summary>
+        [DataMember(Name = "iids")]
+        public ReferenceToAnEntityInstance Iids { get; set; }
+
+        [DataMember(Name = "widPx")]
+        public int WidPx { get; set; }
+
+        [DataMember(Name = "worldX")]
+        public int WorldX { get; set; }
+
+        [DataMember(Name = "worldY")]
+        public int WorldY { get; set; }
     }
 
     /// <summary>
@@ -2308,7 +2395,7 @@ namespace LDtkUnity
 
     public enum EmbedAtlas { LdtkIcons };
 
-    public enum Flag { DiscardPreCsvIntGrid, ExportPreCsvIntGridFormat, IgnoreBackupSuggest, MultiWorlds, PrependIndexToLevelFileNames, UseMultilinesType };
+    public enum Flag { DiscardPreCsvIntGrid, ExportOldTableOfContentData, ExportPreCsvIntGridFormat, IgnoreBackupSuggest, MultiWorlds, PrependIndexToLevelFileNames, UseMultilinesType };
 
     public enum BgPos { Contain, Cover, CoverDirty, Repeat, Unscaled };
 

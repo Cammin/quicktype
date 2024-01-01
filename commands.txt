@@ -1,0 +1,3 @@
+tsc --project src/cli   
+
+dist\cli\index.js -s schema JSON_SCHEMA.json -o ldtk.cs --namespace "LDtkUnity" --number-type double -t "LdtkJson"
