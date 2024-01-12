@@ -1069,6 +1069,12 @@ namespace LDtkUnity
         /// </summary>
         [DataMember(Name = "uiFilterTags")]
         public string[] UiFilterTags { get; set; }
+
+        /// <summary>
+        /// Asynchronous rendering option for large/complex layers
+        /// </summary>
+        [DataMember(Name = "useAsyncRender")]
+        public bool UseAsyncRender { get; set; }
     }
 
     public partial class AutoLayerRuleGroup
