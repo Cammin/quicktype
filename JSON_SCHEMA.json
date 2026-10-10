@@ -1,9 +1,9 @@
 {
   "description": "This file is a JSON schema of files created by LDtk level editor (https://ldtk.io).",
-  "title": "LDtk 1.5.3 JSON schema",
+  "title": "LDtk 1.5.4 JSON schema",
   "$schema": "https://json-schema.org/draft-07/schema#",
   "$ref": "#/LdtkJsonRoot",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "LdtkJsonRoot": {
     "description": "This is the root of any Project JSON file. It contains:  - the project settings, - an array of levels, - a group of definitions (that can probably be safely ignored for most users).",
     "title": "LDtk Json root",
@@ -32,8 +32,8 @@
       "flags",
       "identifierStyle",
       "imageExportMode",
+      "jsonStyle",
       "levelNamePattern",
-      "minifyJson",
       "nextUid",
       "simplifiedExport"
     ],
@@ -328,6 +328,14 @@
           "array"
         ]
       },
+      "jsonStyle": {
+        "description": "JSON style Possible values: `Minified`, `Compact`, `Full`",
+        "enum": [
+          "Minified",
+          "Compact",
+          "Full"
+        ]
+      },
       "jsonVersion": {
         "description": "File format version",
         "type": [
@@ -373,7 +381,7 @@
         ]
       },
       "minifyJson": {
-        "description": "If TRUE, the Json is partially minified (no indentation, nor line breaks, default is FALSE)",
+        "description": "**WARNING**: this deprecated value will be *removed* completely on version 1.7.0+  Replaced by: `jsonStyle`",
         "type": [
           "boolean"
         ]
@@ -1463,7 +1471,7 @@
           ]
         },
         "tileRenderMode": {
-          "description": "An enum describing how the the Entity tile is rendered inside the Entity bounds. Possible values: `Cover`, `FitInside`, `Repeat`, `Stretch`, `FullSizeCropped`, `FullSizeUncropped`, `NineSlice`",
+          "description": "An enum describing how the Entity tile is rendered inside the Entity bounds. Possible values: `Cover`, `FitInside`, `Repeat`, `Stretch`, `FullSizeCropped`, `FullSizeUncropped`, `NineSlice`",
           "enum": [
             "Cover",
             "FitInside",
@@ -2478,12 +2486,15 @@
         "uid",
         "autoRuleGroups",
         "canSelectWhenInactive",
+        "entityDepthSorting",
         "excludedTags",
         "guideGridHei",
         "guideGridWid",
+        "guideOpacity",
         "hideFieldsWhenInactive",
         "hideInList",
         "inactiveOpacity",
+        "layerUidsPreventingAutoTilingHere",
         "renderInWorldView",
         "requiredTags",
         "tilePivotX",
@@ -2494,6 +2505,12 @@
       ],
       "additionalProperties": false,
       "properties": {
+        "guideOpacity": {
+          "description": "Opacity of the optional \"guide\" grid",
+          "type": [
+            "number"
+          ]
+        },
         "pxOffsetX": {
           "description": "X offset of the layer, in pixels (IMPORTANT: this should be added to the `LayerInstance` optional offset)",
           "type": [
@@ -2545,6 +2562,17 @@
           "description": "Height of the optional \"guide\" grid in pixels",
           "type": [
             "integer"
+          ]
+        },
+        "layerUidsPreventingAutoTilingHere": {
+          "description": "",
+          "items": {
+            "type": [
+              "integer"
+            ]
+          },
+          "type": [
+            "array"
           ]
         },
         "uiColor": {
@@ -2683,6 +2711,13 @@
             "integer"
           ]
         },
+        "guideColor": {
+          "description": "Color of the optional \"guide\" grid",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "requiredTags": {
           "description": "An array of tags to filter Entities that can be added to this layer",
           "items": {
@@ -2719,6 +2754,14 @@
             "integer"
           ]
         },
+        "entityDepthSorting": {
+          "description": "Entity depth sorting mode. Possible values: `Manual`, `YAscending`, `YDescending`",
+          "enum": [
+            "Manual",
+            "YAscending",
+            "YDescending"
+          ]
+        },
         "parallaxFactorX": {
           "description": "Parallax horizontal factor (from -1 to 1, defaults to 0) which affects the scrolling speed of this layer, creating a fake 3D (parallax) effect.",
           "type": [
@@ -2726,7 +2769,7 @@
           ]
         },
         "autoTilesKilledByOtherLayerUid": {
-          "description": "",
+          "description": "*This field was removed in 1.5.4 and should no longer be used.*",
           "type": [
             "integer",
             "null"

@@ -1,0 +1,13 @@
+To remember what i need to do.
+
+
+grab the newest json schema: https://github.com/deepnight/ldtk/blob/master/docs/JSON_SCHEMA.json
+
+
+replace the old schema json file.
+
+
+Then run a specific command:
+
+npx tsc --project src/cli
+node .\dist\cli\index.js -s schema .\JSON_SCHEMA.json -l csstj -o ldtk.cs --namespace "LDtkUnity" --number-type double -t "LdtkJson"

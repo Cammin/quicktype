@@ -193,6 +193,12 @@ namespace LDtkUnity
         public ImageExportMode ImageExportMode { get; set; }
 
         /// <summary>
+        /// JSON style Possible values: `Minified`, `Compact`, `Full`
+        /// </summary>
+        [DataMember(Name = "jsonStyle")]
+        public JsonStyle JsonStyle { get; set; }
+
+        /// <summary>
         /// File format version
         /// </summary>
         [DataMember(Name = "jsonVersion")]
@@ -213,11 +219,12 @@ namespace LDtkUnity
         public Level[] Levels { get; set; }
 
         /// <summary>
-        /// If TRUE, the Json is partially minified (no indentation, nor line breaks, default is
-        /// FALSE)
+        /// **WARNING**: this deprecated value will be *removed* completely on version 1.7.0+
+        /// Replaced by: `jsonStyle`
         /// </summary>
+        [IgnoreDataMember]
         [DataMember(Name = "minifyJson")]
-        public bool MinifyJson { get; set; }
+        public bool? MinifyJson { get; set; }
 
         /// <summary>
         /// Next Unique integer ID available
@@ -526,7 +533,7 @@ namespace LDtkUnity
         public TilesetRectangle TileRect { get; set; }
 
         /// <summary>
-        /// An enum describing how the the Entity tile is rendered inside the Entity bounds. Possible
+        /// An enum describing how the Entity tile is rendered inside the Entity bounds. Possible
         /// values: `Cover`, `FitInside`, `Repeat`, `Stretch`, `FullSizeCropped`,
         /// `FullSizeUncropped`, `NineSlice`
         /// </summary>
@@ -892,6 +899,9 @@ namespace LDtkUnity
         [DataMember(Name = "autoTilesetDefUid")]
         public int? AutoTilesetDefUid { get; set; }
 
+        /// <summary>
+        /// *This field was removed in 1.5.4 and should no longer be used.*
+        /// </summary>
         [DataMember(Name = "autoTilesKilledByOtherLayerUid")]
         public int? AutoTilesKilledByOtherLayerUid { get; set; }
 
@@ -917,6 +927,12 @@ namespace LDtkUnity
         public string Doc { get; set; }
 
         /// <summary>
+        /// Entity depth sorting mode. Possible values: `Manual`, `YAscending`, `YDescending`
+        /// </summary>
+        [DataMember(Name = "entityDepthSorting")]
+        public EntityDepthSorting EntityDepthSorting { get; set; }
+
+        /// <summary>
         /// An array of tags to forbid some Entities in this layer
         /// </summary>
         [DataMember(Name = "excludedTags")]
@@ -929,6 +945,12 @@ namespace LDtkUnity
         public int GridSize { get; set; }
 
         /// <summary>
+        /// Color of the optional "guide" grid
+        /// </summary>
+        [DataMember(Name = "guideColor")]
+        public string GuideColor { get; set; }
+
+        /// <summary>
         /// Height of the optional "guide" grid in pixels
         /// </summary>
         [DataMember(Name = "guideGridHei")]
@@ -939,6 +961,12 @@ namespace LDtkUnity
         /// </summary>
         [DataMember(Name = "guideGridWid")]
         public int GuideGridWid { get; set; }
+
+        /// <summary>
+        /// Opacity of the optional "guide" grid
+        /// </summary>
+        [DataMember(Name = "guideOpacity")]
+        public float GuideOpacity { get; set; }
 
         [DataMember(Name = "hideFieldsWhenInactive")]
         public bool HideFieldsWhenInactive { get; set; }
@@ -974,6 +1002,9 @@ namespace LDtkUnity
         /// </summary>
         [DataMember(Name = "intGridValuesGroups")]
         public IntGridValueGroupDefinition[] IntGridValuesGroups { get; set; }
+
+        [DataMember(Name = "layerUidsPreventingAutoTilingHere")]
+        public int[] LayerUidsPreventingAutoTilingHere { get; set; }
 
         /// <summary>
         /// Parallax horizontal factor (from -1 to 1, defaults to 0) which affects the scrolling
@@ -2384,7 +2415,7 @@ namespace LDtkUnity
     public enum RenderMode { Cross, Ellipse, Rectangle, Tile };
 
     /// <summary>
-    /// An enum describing how the the Entity tile is rendered inside the Entity bounds. Possible
+    /// An enum describing how the Entity tile is rendered inside the Entity bounds. Possible
     /// values: `Cover`, `FitInside`, `Repeat`, `Stretch`, `FullSizeCropped`,
     /// `FullSizeUncropped`, `NineSlice`
     /// </summary>
@@ -2399,6 +2430,11 @@ namespace LDtkUnity
     /// Defines how tileIds array is used Possible values: `Single`, `Stamp`
     /// </summary>
     public enum TileMode { Single, Stamp };
+
+    /// <summary>
+    /// Entity depth sorting mode. Possible values: `Manual`, `YAscending`, `YDescending`
+    /// </summary>
+    public enum EntityDepthSorting { Manual, YAscending, YDescending };
 
     /// <summary>
     /// Type of the layer as Haxe Enum Possible values: `IntGrid`, `Entities`, `Tiles`,
@@ -2425,6 +2461,11 @@ namespace LDtkUnity
     /// `OneImagePerLevel`, `LayersAndLevels`
     /// </summary>
     public enum ImageExportMode { LayersAndLevels, None, OneImagePerLayer, OneImagePerLevel };
+
+    /// <summary>
+    /// JSON style Possible values: `Minified`, `Compact`, `Full`
+    /// </summary>
+    public enum JsonStyle { Compact, Full, Minified };
 
     public partial class LdtkJson
     {
