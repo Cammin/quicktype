@@ -8,3 +8,8 @@ replace the old schema json file.
 
 
 Then run a specific command that is in the commands.txt.
+
+
+SPECIFIC EXCEPTIONS:
+TileInstance T should remain nullable until this is fixed:  https://github.com/deepnight/ldtk/issues/1115
+AutoLayerRuleDefinition TileRectsIds should remain nullable until this is fixed: https://github.com/deepnight/ldtk/issues/1114
